@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60" status="INFO">
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} %highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=green, DEBUG=green bold, TRACE=blue} %style{%pid{PID_NOT_SUPPORTED}}{magenta} [%15.15t] %style{%-40.40C{1.}}{cyan} : %m%n"/>
+        </Console>
+        <RollingRandomAccessFile name="RollingRandomAccessFile"
+                                 fileName="logs/diploma.log"
+                                 filePattern="logs/diploma-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout pattern="%d{ISO8601} %5.5p [%15.15t] %30.30logger{1.} :  %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>
